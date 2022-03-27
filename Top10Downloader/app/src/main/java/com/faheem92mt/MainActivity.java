@@ -68,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
 
             ArrayList<FeedEntry> apps;
             apps = parseApplications.getApplications();
-            String ss1 = apps.get(0).getName();
-            String ss2 = apps.get(0).getArtist();
-            String ss3 = apps.get(0).getSummary();
+            String ss1 = apps.get(5).getName();
+            String ss2 = apps.get(5).getArtist();
+            String ss3 = apps.get(5).getSummary();
 
             tvName.setText(ss1);
             tvArtist.setText(ss2);
