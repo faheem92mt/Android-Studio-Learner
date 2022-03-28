@@ -32,14 +32,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
-        setContentView(R.layout.list_record);
+        setContentView(R.layout.activity_main);
         listApps = (ListView) findViewById(R.id.xmlListView);
 
-        tvName = (TextView) findViewById(R.id.tvName);
-        tvArtist = (TextView) findViewById(R.id.tvArtist);
-        tvSummary = (TextView) findViewById(R.id.tvSummary);
-
-        tvSummary.setMovementMethod(new ScrollingMovementMethod());
+//        tvName = (TextView) findViewById(R.id.tvName);
+//        tvArtist = (TextView) findViewById(R.id.tvArtist);
+//        tvSummary = (TextView) findViewById(R.id.tvSummary);
+//
+//        tvSummary.setMovementMethod(new ScrollingMovementMethod());
 
         //
         Log.d(TAG, "onCreate: starting Async task");
@@ -66,15 +66,17 @@ public class MainActivity extends AppCompatActivity {
 //            ArrayAdapter<FeedEntry> arrayAdapter = new ArrayAdapter<FeedEntry>(MainActivity.this, R.layout.list_item, parseApplications.getApplications());
 //            listApps.setAdapter(arrayAdapter);
 
-            ArrayList<FeedEntry> apps;
-            apps = parseApplications.getApplications();
-            String ss1 = apps.get(5).getName();
-            String ss2 = apps.get(5).getArtist();
-            String ss3 = apps.get(5).getSummary();
+//            ArrayList<FeedEntry> apps;
+//            apps = parseApplications.getApplications();
+//            String ss1 = apps.get(5).getName();
+//            String ss2 = apps.get(5).getArtist();
+//            String ss3 = apps.get(5).getSummary();
+//
+//
+//            tvName.setText(ss1);
+//            tvArtist.setText(ss2);
+//            tvSummary.setText(ss3);
 
-            tvName.setText(ss1);
-            tvArtist.setText(ss2);
-            tvSummary.setText(ss3);
 
 
         }
