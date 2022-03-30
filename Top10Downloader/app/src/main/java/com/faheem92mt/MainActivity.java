@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private ListView listApps;
-    private TextView tvName;
-    private TextView tvArtist;
-    private TextView tvSummary;
+//    private TextView tvName;
+//    private TextView tvArtist;
+//    private TextView tvSummary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: starting Async task");
         //
         DownloadData downloadData = new DownloadData();
-        downloadData.execute("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=25/xml");
+        downloadData.execute("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml");
 
         //
         Log.d(TAG, "onCreate: done");
@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "onPostExecute: parameter is " + s);
             ParseApplications parseApplications = new ParseApplications();
             parseApplications.parse(s);
+
+            FeedAdapter feedAdapter = new FeedAdapter(MainActivity.this, R.layout.list_record, parseApplications.getApplications());
+            listApps.setAdapter(feedAdapter);
 
 //            ArrayAdapter<FeedEntry> arrayAdapter = new ArrayAdapter<FeedEntry>(MainActivity.this, R.layout.list_item, parseApplications.getApplications());
 //            listApps.setAdapter(arrayAdapter);
