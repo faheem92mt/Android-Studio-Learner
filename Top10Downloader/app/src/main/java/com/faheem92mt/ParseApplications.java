@@ -56,7 +56,7 @@ public class ParseApplications {
 
                     // case 1
                     case XmlPullParser.START_TAG:
-                        Log.d(TAG, "parse: Starting tag for " + tagName);
+//                        Log.d(TAG, "parse: Starting tag for " + tagName);
 
                         // this if condition makes sure that only if we're inside an entry tag (which represents one app) we're going
                         // to be creating a new stuff to be added to the arraylist, which will represent one particular app
@@ -73,7 +73,7 @@ public class ParseApplications {
 
                     // case 2
                     case XmlPullParser.END_TAG:
-                        Log.d(TAG, "parse: Ending tag for " + tagName);
+//                        Log.d(TAG, "parse: Ending tag for " + tagName);
                         if(inEntry) {
                             if("entry".equalsIgnoreCase(tagName)) {
                                 applications.add(currentRecord);
