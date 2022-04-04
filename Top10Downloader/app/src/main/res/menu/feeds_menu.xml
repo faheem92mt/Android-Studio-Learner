@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/mnuRefresh"
+        android:title="Refresh List" />
+    <item
         android:id="@+id/mnuFree"
         android:title="Free Apps" />
     <item

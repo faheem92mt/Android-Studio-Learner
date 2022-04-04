@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
     private ListView listApps;
     private String feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=%d/xml";
     private int feedLimit = 10;
+    private boolean start = true;
+    private String feedUrl2 = "";
+
+    private static final String STATE_FEED_LIMIT = "FeedLimit";
+    private static final String STATE_FEED_URL = "Url";
 
 //    private TextView tvName;
 //    private TextView tvArtist;
@@ -41,14 +46,41 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listApps = (ListView) findViewById(R.id.xmlListView);
 
+
+
 //        tvName = (TextView) findViewById(R.id.tvName);
 //        tvArtist = (TextView) findViewById(R.id.tvArtist);
 //        tvSummary = (TextView) findViewById(R.id.tvSummary);
 //
 //        tvSummary.setMovementMethod(new ScrollingMovementMethod());
 
-        downloadUrl(String.format(feedUrl,feedLimit));
 
+
+//        if (start) {
+//            downloadUrl(String.format(feedUrl,feedLimit));
+//            start = false;
+//        }
+
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+        feedLimit = savedInstanceState.getInt(STATE_FEED_LIMIT);
+        feedUrl = savedInstanceState.getString(STATE_FEED_URL);
+        downloadUrl(String.format(feedUrl,feedLimit));
+        feedUrl2 = feedUrl;
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt(STATE_FEED_LIMIT,feedLimit);
+        outState.putString(STATE_FEED_URL,feedUrl2);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -69,15 +101,35 @@ public class MainActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
+        boolean need = true;
+
+
         switch (id) {
+            case R.id.mnuRefresh:
+                feedUrl = feedUrl;
+                need = true;
+                break;
             case R.id.mnuFree:
                 feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=%d/xml";
+                if (feedUrl.equals(feedUrl2)) {
+                    need = false;
+                }
+                feedUrl2 = feedUrl;
                 break;
             case R.id.mnuPaid:
                 feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/toppaidapplications/limit=%d/xml";
+                if (feedUrl.equals(feedUrl2)) {
+                    need = false;
+                }
+                feedUrl2 = feedUrl;
                 break;
             case R.id.mnuSongs:
                 feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topsongs/limit=%d/xml";
+                if (feedUrl.equals(feedUrl2)) {
+                    need = false;
+                }
+                feedUrl2 = feedUrl;
+                Log.d(TAG, "feed2 is " + feedUrl2 );
                 break;
             case R.id.mnu10:
             case R.id.mnu25:
@@ -88,12 +140,22 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d(TAG, "onOptionsItemSelected: " + item.getTitle() + " feedLimit unchanged");
+                    need = false;
                 }
                 break;
             default:
                 return super.onOptionsItemSelected(item);
         }
-        downloadUrl(String.format(feedUrl,feedLimit));
+
+//        downloadUrl(String.format(feedUrl,feedLimit));
+
+        if (need) {
+            downloadUrl(String.format(feedUrl,feedLimit));
+        }
+        else {
+            need = true;
+        }
+
         return true;
 
     }

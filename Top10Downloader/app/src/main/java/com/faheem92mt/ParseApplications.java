@@ -30,7 +30,7 @@ public class ParseApplications {
 
     public boolean parse(String xmlData) {
         // if method parse will return false if it fails to parse
-        boolean status =true;
+        boolean status = true;
         // the latest app while parsing the xml gets stored in this variable first
         FeedEntry currentRecord = null;
         // this boolean value will tell if we're inside the entry tag of the app in question while we're parsing the xml (the entry tag here refers to the ones inside xml)
@@ -74,19 +74,19 @@ public class ParseApplications {
                     // case 2
                     case XmlPullParser.END_TAG:
 //                        Log.d(TAG, "parse: Ending tag for " + tagName);
-                        if(inEntry) {
-                            if("entry".equalsIgnoreCase(tagName)) {
+                        if (inEntry) {
+                            if ("entry".equalsIgnoreCase(tagName)) {
                                 applications.add(currentRecord);
                                 inEntry = false;
-                            } else if("name".equalsIgnoreCase(tagName)) {
+                            } else if ("name".equalsIgnoreCase(tagName)) {
                                 currentRecord.setName(textValue);
-                            } else if("artist".equalsIgnoreCase(tagName)) {
+                            } else if ("artist".equalsIgnoreCase(tagName)) {
                                 currentRecord.setArtist(textValue);
-                            } else if("releaseDate".equalsIgnoreCase(tagName)) {
+                            } else if ("releaseDate".equalsIgnoreCase(tagName)) {
                                 currentRecord.setReleaseDate(textValue);
                             } else if ("summary".equalsIgnoreCase(tagName)) {
                                 currentRecord.setSummary(textValue);
-                            } else if("image".equalsIgnoreCase(tagName)) {
+                            } else if ("image".equalsIgnoreCase(tagName)) {
                                 currentRecord.setImageURL(textValue);
                             }
                         }
@@ -99,13 +99,12 @@ public class ParseApplications {
                 eventType = xpp.next();
 
             }
-            for (FeedEntry app: applications) {
+            for (FeedEntry app : applications) {
                 Log.d(TAG, "***********************");
                 Log.d(TAG, app.toString());
             }
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             status = false;
             e.printStackTrace();
         }
