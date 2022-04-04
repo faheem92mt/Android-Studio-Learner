@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private ListView listApps;
+    private List list;
     private String feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=%d/xml";
     private int feedLimit = 10;
     private boolean start = true;
@@ -35,9 +36,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String STATE_FEED_LIMIT = "FeedLimit";
     private static final String STATE_FEED_URL = "Url";
 
+
 //    private TextView tvName;
 //    private TextView tvArtist;
 //    private TextView tvSummary;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listApps = (ListView) findViewById(R.id.xmlListView);
 
+        downloadUrl(String.format(feedUrl,feedLimit));
 
+//        String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+
+//        list = new ArrayList<String>();
+//        list.add("Hello, welcome to the Top 10 Downloader App.");
+//        list.add("");
+//        list.add("To start, click the 3 dots and choose your");
+//        list.add("options.");
+
+//            ArrayAdapter<FeedEntry> arrayAdapter = new ArrayAdapter<FeedEntry>(MainActivity.this, R.layout.list_item, parseApplications.getApplications());
+//            listApps.setAdapter(arrayAdapter);
+
+//            ArrayList<FeedEntry> apps;
+//            apps = parseApplications.getApplications();
+//            String ss1 = apps.get(5).getName();
+//            String ss2 = apps.get(5).getArtist();
+//            String ss3 = apps.get(5).getSummary();
+//
+//
+//            tvName.setText(ss1);
+//            tvArtist.setText(ss2);
+//            tvSummary.setText(ss3);
+
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, R.layout.list_item, cars);
+//        listApps.setAdapter(arrayAdapter);
 
 //        tvName = (TextView) findViewById(R.id.tvName);
 //        tvArtist = (TextView) findViewById(R.id.tvArtist);
